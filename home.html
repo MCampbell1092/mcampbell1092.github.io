@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html>
-   <body>
-      Offset:<br>
-      <input type="text" id="offset" value=""><br>
-      Centerline_Raidus:<br>
-      <input type="text" id="centerline_radius" value=""><br>
-      Bead_Amount:<br>
-      <input type="text" id="amount_to_bead" value=""><br>
-      <p>Click the button to change the value of the text field.</p>
-      <button style="margin-right:2%" onclick="getCutLength()">Get Cut Length</button>        
-      <button onclick="reset_boxes()">Reset</button>
-      <p id="answer"></p>
-      <script>
-         function getCutLength() {
-         	let offset = document.getElementById("offset").value;
-         	let centerline_radius = document.getElementById("centerline_radius").value;
-             let amount_to_bead = document.getElementById("amount_to_bead").value;
-             
-             offset = (offset * 1.414);
-         	let take_up = (centerline_radius * 0.414211111111) * 2;
-         	let off_min_takeup = (offset - take_up);
-             
-             amount_to_bead = (amount_to_bead * 2);
-             let cut_length = (off_min_takeup - amount_to_bead);
-             
-             if (cut_length >= 0) {
-             	 let one_sixteenth = 0.0625;
-                 let whole_number = Math.floor(cut_length).toString();
-                 let decimal = cut_length.toString();
-                 
-                 if (whole_number.length === decimal.length) {
-           			console.log("NO DECIMAL FOUND");
-         		} else {
-         			decimal = "0." + decimal.substring(whole_number.length + 1);
-         		}
-                  
-                 let answer = decimal / one_sixteenth;
-                 
-                 document.getElementById("answer").innerHTML = whole_number + " & " + answer + " sixteenths";
-             }
-         }
-         
-         
-         function reset_boxes() {
-         	let offset = document.getElementById("offset").value = "";
-         	let centerline_radius = document.getElementById("centerline_radius").value = "";
-         	let amount_to_bead = document.getElementById("amount_to_bead").value = "";
-         }
-      </script>
-   </body>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="mystyle.css"> </head>
+
+<body>
+	<div class="box"> Offset:
+		<br>
+		<input type="number" id="offset" value="">
+		<br> Centerline_Raidus:
+		<br>
+		<input type="number" id="centerline_radius" value="">
+		<br> Bead_Amount:
+		<br>
+		<input type="number" id="amount_to_bead" value="">
+		<br>
+		<p>Click the button to change the value of the text field.</p>
+		<button style="margin-right:2%" onclick="getCutLength()">Get Cut Length</button>
+		<button onclick="reset_boxes()">Reset</button>
+		<p id="answer">  </p>
+		<script>
+		function getCutLength() {
+			let offset = document.getElementById("offset").value;
+			let centerline_radius = document.getElementById("centerline_radius").value;
+			let amount_to_bead = document.getElementById("amount_to_bead").value;
+			offset = (offset * 1.414);
+			let take_up = (centerline_radius * 0.414211111111) * 2;
+			let off_min_takeup = (offset - take_up);
+			amount_to_bead = (amount_to_bead * 2);
+			let cut_length = (off_min_takeup - amount_to_bead);
+			if(cut_length >= 0) {
+				let one_sixteenth = 0.0625;
+				let whole_number = Math.floor(cut_length).toString();
+				let decimal = cut_length.toString();
+				if(whole_number.length === decimal.length) {
+					console.log("NO DECIMAL FOUND");
+				} else {
+					decimal = "0." + decimal.substring(whole_number.length + 1);
+				}
+				let answer = decimal / one_sixteenth;
+				document.getElementById("answer").innerHTML = whole_number + " & " + answer + " sixteenths";
+			}
+		}
+
+		function reset_boxes() {
+			let offset = document.getElementById("offset").value = "";
+			let centerline_radius = document.getElementById("centerline_radius").value = "";
+			let amount_to_bead = document.getElementById("amount_to_bead").value = "";
+			let answer = document.getElementById("answer").innerHTML = " "
+		}
+		</script>
+	</div>
+</body>
+
 </html>
