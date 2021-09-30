@@ -1,7 +1,7 @@
 body {
 	background-color: #f8e0b3;
 	height:100%;
-	min-width:70vw;
+	min-width:400px;
     
 }
 div.box{
@@ -38,6 +38,7 @@ button {
 
 p#answer {
 	font-size: 300%;
+	min-width: 80vw;
 	color: black;
 	background-color: white;
  	border-style: inset;
