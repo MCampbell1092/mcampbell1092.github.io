@@ -1,11 +1,12 @@
 body {
 	background-color: #f8e0b3;
 	height:100%;
-	min-width:400px;
+	min-width:800px;
     
 }
 div.box{
 	text-align: center;
+	min-width:800px
 	margin-top: 2%;
 	margin-left: 10%;
 	margin-right: 10%;
@@ -38,7 +39,7 @@ button {
 
 p#answer {
 	font-size: 300%;
-	min-width: 80vw;
+	min-width: 80%;
 	color: black;
 	background-color: white;
  	border-style: inset;
