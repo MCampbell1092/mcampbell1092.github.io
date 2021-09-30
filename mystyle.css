@@ -1,7 +1,7 @@
 body {
 	background-color: #f8e0b3;
 	height:100%;
-	width:100%;
+	min-width:70vw;
     
 }
 div.box{
