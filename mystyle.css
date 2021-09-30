@@ -1,0 +1,44 @@
+body {
+	background-color: #f8e0b3;
+	height:100%;
+	width:100%;
+    
+}
+div.box{
+	text-align: center;
+	margin-top: 2%;
+	margin-left: 10%;
+	margin-right: 10%;
+	font-size: 200%;
+}
+div.container {
+	width:100vh;
+	height:100vh;
+}
+
+input{
+	min-width: 80vw;
+	min-height: 5vh;
+    	margin-bottom: 2%;
+	font-size: 100%;
+}
+@viewport{
+	zoom: 1.0;
+	width: extend-to-zoom;
+}
+@-ms-viewport{
+	zoom: 1.0;
+	width: extend-to-zoom;
+}
+button {
+	margin-right: 3%;
+	padding: 3%;
+	font-size: 100%;
+}
+
+p#answer {
+	font-size: 300%;
+	color: black;
+	background-color: white;
+ 	border-style: inset;
+}
