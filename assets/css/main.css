@@ -170,6 +170,17 @@ input, select, textarea {
 		font-size: 1.3em;
 	}
 
+	span#equation {
+		background-color: hsl(77deg 26% 35%);
+		margin: 0em 10% 0px 10%;
+	}
+
+	p#equation {
+		margin-left: 0%;
+    	margin-right: 0%;
+		background-color: hsl(75deg 31% 39%);
+	}
+
 	section, article {
 		margin: 0 0 60px 0;
 	}
