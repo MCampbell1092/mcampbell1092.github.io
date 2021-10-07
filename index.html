@@ -22,7 +22,7 @@
 							<nav id="nav">
 								<a href="index.html" class="current-page-item">Cut-Piece</a>
 								<a href="twocolumn1.html">Total take-up of fittings</a>
-								<a href="twocolumn2.html">Two Column #2</a>
+								<a href="twocolumn2.html">Minimum Offset</a>
 								<a href="onecolumn.html">One Column</a>
 								<a href="threecolumn.html">Three Column</a>
 							</nav>
@@ -56,6 +56,7 @@
 					<span>
 						<p id="answer">  </p>
 					</span>
+					<br>
 					<span id="equation" style="margin:0.0em 0 0 0">
 						<p id="equation">((x * 1.414) - (y * 0.41421111111) * 2) + (z * 2)<br></p>
 					X = offset<br>
@@ -127,6 +128,24 @@
 				let centerline_radius = document.getElementById("centerline_radius").value = "";
 				let amount_to_bead = document.getElementById("amount_to_bead").value = "";
 				let answer = document.getElementById("answer").innerHTML = " "
+			}
+
+			function convert_to_sixteenths(decimal) {
+				let one_sixteenth = 0.0625;
+				let whole_number = Math.floor(cut_length).toString();
+				let decimal = cut_length.toString();
+
+				if (whole_number.length === decimal.length) {
+					console.log("NO DECIMAL FOUND");
+				} else {
+					decimal = "0." + decimal.substring(whole_number.length + 1);
+				}
+
+				let answer = decimal / one_sixteenth;
+				answer = answer.toString().substring(0,4);
+				console.log(answer);
+
+				return decimal;
 			}
 		</script>
 	</div>
