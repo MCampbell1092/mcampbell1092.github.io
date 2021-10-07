@@ -88,8 +88,9 @@
 					let run_squared = square_it(run);
 					let rise_squared = square_it(rise);
 					let run_rise_squared = run_squared + rise_squared;
+					let  run_rise_square_root =  Math.sqrt(run_rise_squared);
 
-					document.getElementById("answer").innerHTML = run_rise_squared;
+					document.getElementById("answer").innerHTML = convert_to_sixteenths(run_rise_square_root);
 				}
 			}
 
