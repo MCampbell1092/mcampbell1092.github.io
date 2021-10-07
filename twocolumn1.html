@@ -28,7 +28,7 @@
 								<a href="index.html">Cut-Piece</a>
 								<a href="twocolumn1.html" class="current-page-item">Total take-up of fittings</a>
 								<a href="twocolumn2.html">Minimum Offset</a>
-								<a href="onecolumn.html">One Column</a>
+								<a href="onecolumn.html">Rolling Offset</a>
 								<a href="threecolumn.html">Three Column</a>
 							</nav>
 						</header>
@@ -107,6 +107,25 @@
 				}
 
 
+			}
+
+
+			function convert_to_sixteenths(number) {
+				let one_sixteenth = 0.0625;
+				let whole_number = Math.floor(number).toString();
+				let decimal = number.toString();
+
+				if (whole_number.length === decimal.length) {
+					console.log("NO DECIMAL FOUND");
+				} else {
+					decimal = "0." + decimal.substring(whole_number.length + 1);
+				}
+
+				let answer = decimal / one_sixteenth;
+				answer = answer.toString().substring(0,4);
+				console.log(answer);
+
+				return whole_number + " & " + answer + " sixteenths";
 			}
 
 
