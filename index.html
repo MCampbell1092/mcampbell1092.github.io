@@ -23,7 +23,7 @@
 								<a href="index.html" class="current-page-item">Cut-Piece</a>
 								<a href="twocolumn1.html">Total take-up of fittings</a>
 								<a href="twocolumn2.html">Minimum Offset</a>
-								<a href="onecolumn.html">One Column</a>
+								<a href="onecolumn.html">Rolling Offset</a>
 								<a href="threecolumn.html">Three Column</a>
 							</nav>
 						</header>
@@ -74,7 +74,7 @@
 				let amount_to_bead = document.getElementById("amount_to_bead").value;
 
 				// Makes sure we received inputs...
-				if ( offset == "" || centerline_radius == "" || amount_to_bead == ""){
+				if ( offset == "" || centerline_radius == ""){
 					let answer = "";
 
 					if (offset == "") {
@@ -85,13 +85,6 @@
 							answer = (answer + "<br>")
 						}
 						answer = answer + "Didn't provide a centerline radius.";
-					}
-					if (amount_to_bead == "") {
-						if (answer == "") {
-							answer = "Didn't provide a bead amount.";
-						} else {
-							answer = answer + "<br>Didn't provide a bead amount.";
-						}
 					}
 					document.getElementById("answer").innerHTML = answer;
 				} else {
@@ -130,10 +123,10 @@
 				let answer = document.getElementById("answer").innerHTML = " "
 			}
 
-			function convert_to_sixteenths(decimal) {
+			function convert_to_sixteenths(number) {
 				let one_sixteenth = 0.0625;
-				let whole_number = Math.floor(cut_length).toString();
-				let decimal = cut_length.toString();
+				let whole_number = Math.floor(number).toString();
+				let decimal = number.toString();
 
 				if (whole_number.length === decimal.length) {
 					console.log("NO DECIMAL FOUND");
@@ -145,7 +138,7 @@
 				answer = answer.toString().substring(0,4);
 				console.log(answer);
 
-				return decimal;
+				return whole_number + " & " + answer + " sixteenths";
 			}
 		</script>
 	</div>
