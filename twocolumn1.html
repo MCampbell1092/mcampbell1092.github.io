@@ -60,6 +60,11 @@
 					<span>
 						<p id="answer">  </p>
 					</span>
+					<span id="equation" style="margin:0.5em 0 0 0">
+						<p id="equation">X[input] + 2(Y[input] x .4142)<br></p>
+						X = Offset<br>
+						Y = Centerline_Radius
+					</span>
 				</div>
 
 			</div>
@@ -84,26 +89,12 @@
 					}
 
 				} else {
-					centerline_radius = (centerline_radius * .4142);
-					centerline_radius = (centerline_radius * 2);
+					 centerline_multiplied = (centerline_radius * 0.4142);
+					 centerline_multiplied = (centerline_multiplied * 2);
+					 offset_added = (centerline_multiplied + offset);
 
-					answer = (offset + centerline_radius);
-
-					let one_sixteenth = 0.0625;
-					let whole_number = Math.floor(answer).toString();
-					let decimal = answer.toString();
-
-					if (whole_number.length === decimal.length) {
-						console.log("NO DECIMAL FOUND");
-					} else {
-						decimal = "0." + decimal.substring(whole_number.length + 1);
-					}
-
-					answer = decimal / one_sixteenth;
-					answer = answer.toString().substring(0,4);
-					console.log(answer);
-
-					document.getElementById("answer").innerHTML = whole_number + " & " + answer + " sixteenths";
+					 answer = convert_to_sixteenths(offset_added);
+					document.getElementById("answer").innerHTML = answer;
 				}
 
 
