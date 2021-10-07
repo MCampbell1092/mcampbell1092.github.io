@@ -173,6 +173,8 @@ input, select, textarea {
 	span#equation {
 		background-color: hsl(77deg 26% 35%);
 		margin: 0em 10% 0px 10%;
+		margin-right: 10% !important;
+		margin-left: 10% !important;
 	}
 
 	p#equation {
