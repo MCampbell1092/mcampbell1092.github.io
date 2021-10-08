@@ -61,7 +61,7 @@
 						<p id="answer">  </p>
 					</span>
 					<span id="equation" style="margin:0.5em 0 0 0">
-						<p id="equation">X[input] + 2(Y[input] x .4142)<br></p>
+						<p id="equation">X + 2(Y * .4142)<br></p>
 						X = Offset<br>
 						Y = Centerline_Radius
 					</span>
@@ -72,15 +72,16 @@
 
 		<script>
 			function getCutLength() {
-				let offset = document.getElementById("offset").value;
-				let centerline_radius = document.getElementById("centerline_radius").value;
+				var offset = parseFloat(document.getElementById("offset").value);
+				var centerline_radius = parseFloat(document.getElementById("centerline_radius").value);
+				var offset_added;
 				var answer = "";
 
-				if ( offset == "" || centerline_radius == ""){
-					if (offset == "") {
+				if ( isNaN(offset) || isNaN(centerline_radius)){
+					if (isNaN(offset)) {
 						answer = "Didn't provide an offset.";
 					}
-					if (centerline_radius == "") {
+					if (isNaN(centerline_radius)) {
 						if (answer != "") {
 							answer = (answer + "<br>")
 						}
@@ -89,34 +90,14 @@
 					}
 
 				} else {
-					 centerline_multiplied = (centerline_radius * 0.4142);
-					 centerline_multiplied = (centerline_multiplied * 2);
-					 offset_added = (centerline_multiplied + offset);
-
-					 answer = convert_to_sixteenths(offset_added);
+					centerline_multiplied = (centerline_radius * 0.4142);
+					centerline_multiplied = (centerline_multiplied * 2);
+					offset_added = (centerline_multiplied + offset);
+					answer = convert_to_sixteenths(offset_added);
 					document.getElementById("answer").innerHTML = answer;
 				}
 
 
-			}
-
-
-			function convert_to_sixteenths(number) {
-				let one_sixteenth = 0.0625;
-				let whole_number = Math.floor(number).toString();
-				let decimal = number.toString();
-
-				if (whole_number.length === decimal.length) {
-					console.log("NO DECIMAL FOUND");
-				} else {
-					decimal = "0." + decimal.substring(whole_number.length + 1);
-				}
-
-				let answer = decimal / one_sixteenth;
-				answer = answer.toString().substring(0,4);
-				console.log(answer);
-
-				return whole_number + " & " + answer + " sixteenths";
 			}
 
 
@@ -134,6 +115,7 @@
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/func_holder.js"></script>
 
 </body>
 

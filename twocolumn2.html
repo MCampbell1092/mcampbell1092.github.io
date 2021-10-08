@@ -67,7 +67,11 @@
 					centerline_radius = (centerline_radius * 0.4142);
 					centerline_radius = (centerline_radius * 2);
 					centerline_radius = (centerline_radius / 1.414);
+
+					// Convert cut length to sixteenths
 					answer = convert_to_sixteenths(centerline_radius);
+
+					// Place on page.
 					document.getElementById("answer").innerHTML = answer;
 				}
 			}
@@ -76,25 +80,6 @@
 			function reset_boxes() {
 				let centerline_radius = document.getElementById("centerline_radius").value = "";
 				let answer = document.getElementById("answer").innerHTML = " "
-			}
-
-
-			function convert_to_sixteenths(number) {
-				let one_sixteenth = 0.0625;
-				let whole_number = Math.floor(number).toString();
-				let decimal = number.toString();
-
-				if (whole_number.length === decimal.length) {
-					console.log("NO DECIMAL FOUND");
-				} else {
-					decimal = "0." + decimal.substring(whole_number.length + 1);
-				}
-
-				let answer = decimal / one_sixteenth;
-				answer = answer.toString().substring(0,4);
-				console.log(answer);
-
-				return whole_number + " & " + answer + " sixteenths";
 			}
 		</script>
 	</div>
@@ -105,6 +90,7 @@
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
 
 </body>
 

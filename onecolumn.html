@@ -23,7 +23,7 @@
 								<a href="index.html">Cut-Piece</a>
 								<a href="twocolumn1.html">Total take-up of fittings</a>
 								<a href="twocolumn2.html">Minimum run</a>
-								<a href="onecolumn.html" class="current-page-item">Rolling Offset</a>
+								<a href="onecolumn.html" class="current-page-item">Rolling run</a>
 								<a href="threecolumn.html">Three Column</a>
 							</nav>
 						</header>
@@ -66,18 +66,18 @@
 
 		<script>
 			function getCutLength() {
-				let run = document.getElementById("run").value;
-				let rise = document.getElementById("rise").value;
+				let run = parseFloat(document.getElementById("run").value);
+				let rise = parseFloat(document.getElementById("rise").value);
 
 				// Makes sure we received inputs...
-				if ( run == "" || rise == ""){
+				if ( isNaN(run) || isNaN(rise)){
 					let answer = "";
 
-					if (run == "") {
+					if (isNaN(run)) {
 						answer = "Didn't provide an run.";
 					}
-					if (rise == "") {
-						if (run == "") {
+					if (isNaN(rise)) {
+						if (isNaN(run)) {
 							answer = (answer + "<br>")
 						}
 						answer = answer + "Didn't provide a rise.";
@@ -90,7 +90,11 @@
 					let run_rise_squared = run_squared + rise_squared;
 					let  run_rise_square_root =  Math.sqrt(run_rise_squared);
 
-					document.getElementById("answer").innerHTML = convert_to_sixteenths(run_rise_square_root);
+					// Convert cut length to sixteenths
+					answer = convert_to_sixteenths(run_rise_square_root);
+
+					// Place on page.
+					document.getElementById("answer").innerHTML = answer;
 				}
 			}
 
@@ -100,29 +104,6 @@
 				let rise = document.getElementById("rise").value = "";
 				let answer = document.getElementById("answer").innerHTML = " "
 			}
-
-			function convert_to_sixteenths(number) {
-				let one_sixteenth = 0.0625;
-				let whole_number = Math.floor(number).toString();
-				let decimal = number.toString();
-
-				if (whole_number.length === decimal.length) {
-					console.log("NO DECIMAL FOUND");
-				} else {
-					decimal = "0." + decimal.substring(whole_number.length + 1);
-				}
-
-				let answer = decimal / one_sixteenth;
-				answer = answer.toString().substring(0,4);
-				console.log(answer);
-
-				return whole_number + " & " + answer + " sixteenths";
-			}
-
-
-			function square_it(number) {
-   				return Math.pow(number,2);
-}
 		</script>
 	</div>
 
@@ -132,6 +113,7 @@
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
 
 </body>
 

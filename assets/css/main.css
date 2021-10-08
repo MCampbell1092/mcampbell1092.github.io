@@ -175,6 +175,7 @@ input, select, textarea {
 		margin: 0em 10% 0px 10%;
 		margin-right: 10% !important;
 		margin-left: 10% !important;
+		text-transform: none !important;
 	}
 
 	p#equation {

@@ -69,25 +69,26 @@
 
 		<script>
 			function getCutLength() {
-				let offset = document.getElementById("offset").value;
-				let centerline_radius = document.getElementById("centerline_radius").value;
-				let amount_to_bead = document.getElementById("amount_to_bead").value;
+				let offset = parseFloat(document.getElementById("offset").value);
+				let centerline_radius = parseFloat(document.getElementById("centerline_radius").value);
+				let amount_to_bead = parseFloat(document.getElementById("amount_to_bead").value);
 
 				// Makes sure we received inputs...
-				if ( offset == "" || centerline_radius == ""){
+				if ( isNaN(offset) || isNaN(centerline_radius)){
 					let answer = "";
 
-					if (offset == "") {
+					if (isNaN(offset)) {
 						answer = "Didn't provide an offset.";
 					}
-					if (centerline_radius == "") {
-						if (offset == "") {
+					if (isNaN(centerline_radius)) {
+						if (isNaN(offset)) {
 							answer = (answer + "<br>")
 						}
 						answer = answer + "Didn't provide a centerline radius.";
 					}
 					document.getElementById("answer").innerHTML = answer;
 				} else {
+					// Calculate cut length.
 					offset = (offset * 1.414);
 					let take_up = (centerline_radius * 0.414211111111) * 2;
 					let off_min_takeup = (offset - take_up);
@@ -95,23 +96,11 @@
 					amount_to_bead = (amount_to_bead * 2);
 					let cut_length = (off_min_takeup + amount_to_bead);
 
-					if (cut_length >= 0) {
-						let one_sixteenth = 0.0625;
-						let whole_number = Math.floor(cut_length).toString();
-						let decimal = cut_length.toString();
+					// Convert cut length to sixteenths
+					answer = convert_to_sixteenths(cut_length);
 
-						if (whole_number.length === decimal.length) {
-							console.log("NO DECIMAL FOUND");
-						} else {
-							decimal = "0." + decimal.substring(whole_number.length + 1);
-						}
-
-						let answer = decimal / one_sixteenth;
-						answer = answer.toString().substring(0,4);
-						console.log(answer);
-
-						document.getElementById("answer").innerHTML = whole_number + " & " + answer + " sixteenths";
-					}
+					// Place on page.
+					document.getElementById("answer").innerHTML = answer;
 				}
 			}
 
@@ -122,24 +111,6 @@
 				let amount_to_bead = document.getElementById("amount_to_bead").value = "";
 				let answer = document.getElementById("answer").innerHTML = " "
 			}
-
-			function convert_to_sixteenths(number) {
-				let one_sixteenth = 0.0625;
-				let whole_number = Math.floor(number).toString();
-				let decimal = number.toString();
-
-				if (whole_number.length === decimal.length) {
-					console.log("NO DECIMAL FOUND");
-				} else {
-					decimal = "0." + decimal.substring(whole_number.length + 1);
-				}
-
-				let answer = decimal / one_sixteenth;
-				answer = answer.toString().substring(0,4);
-				console.log(answer);
-
-				return whole_number + " & " + answer + " sixteenths";
-			}
 		</script>
 	</div>
 
@@ -149,6 +120,7 @@
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
 
 </body>
 
