@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Two Column 1 - Minimaxing by HTML5 UP</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<div id="header-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+
+						<header id="header">
+							<h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
+							<nav id="nav">
+								<! --- Buttons added here by javascript --- >
+							</nav>
+						</header>
+						<br>
+						<header id="header">
+							<nav id="na2">
+								<a href="cut-piece.html">TestButtonsTwo</a>
+								<a href="cut-piece.html">TestButtonsThree</a>
+							</nav>
+						</header>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Banner -->
+		<div id="banner-wrapper">
+			<div class="container">
+
+				<div id="banner">
+					<span style=margin-bottom:0.05em>Offset:<br></span>
+					<input type="number" id="offset" value=""><br>
+					<span style=margin-bottom:0.05em>Centerline Radius:</span>
+					<input type="number" id="centerline_radius" value="">
+					<br>
+					<button style="margin-right:2%" onclick="getCutLength()">Get Total Take-Up</button>
+					<button onclick="reset_boxes()">Reset</button>
+					<span>
+						<p id="answer">  </p>
+					</span>
+					<span id="equation" style="margin:0.5em 0 0 0">
+						<p id="equation">X + 2(Y * .4142)<br></p>
+						X = Offset<br>
+						Y = Centerline_Radius
+					</span>
+				</div>
+
+			</div>
+		</div>
+
+		<script>
+			function getCutLength() {
+				var offset = parseFloat(document.getElementById("offset").value);
+				var centerline_radius = parseFloat(document.getElementById("centerline_radius").value);
+				var offset_added;
+				var answer = "";
+
+				if ( isNaN(offset) || isNaN(centerline_radius)){
+					if (isNaN(offset)) {
+						answer = "Didn't provide an offset.";
+					}
+					if (isNaN(centerline_radius)) {
+						if (answer != "") {
+							answer = (answer + "<br>")
+						}
+						answer = answer + "Didn't provide a centerline radius.";
+						document.getElementById("answer").innerHTML = answer;
+					}
+
+				} else {
+					centerline_multiplied = (centerline_radius * 0.4142);
+					centerline_multiplied = (centerline_multiplied * 2);
+					offset_added = (centerline_multiplied + offset);
+					answer = convert_to_sixteenths(offset_added);
+					document.getElementById("answer").innerHTML = answer;
+				}
+
+
+			}
+
+
+			function reset_boxes() {
+				let offset = document.getElementById("offset").value = "";
+				let centerline_radius = document.getElementById("centerline_radius").value = "";
+				let answer = document.getElementById("answer").innerHTML = " ";
+			}
+		</script>
+	</div>
+
+	<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/func_holder.js"></script>
+	<script src="/assets/js/append_buttons.js"></script>
+
+</body>
+
+</html>

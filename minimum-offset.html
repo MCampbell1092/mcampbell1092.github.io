@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Minimaxing by HTML5 UP</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<div id="header-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+
+						<header id="header">
+							<h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
+							<nav id="nav">
+								<! --- Buttons added here by javascript --- >
+							</nav>
+						</header>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Banner -->
+		<h2 style="text-align: center"><br>elbow to elbow with no overlap</h2>
+		<div id="banner-wrapper">
+			<div class="container">
+
+				<div id="banner">
+					<span style=margin-bottom:0.05em>Centerline Radius:</span>
+					<input type="number" id="centerline_radius" value="">
+					<br>
+					<button style="margin-right:2%" onclick="getCutLength()">Calculate</button>
+					<button onclick="reset_boxes()">Reset</button>
+					<span>
+						<p id="answer">  </p>
+					</span>
+					<span id="equation" style="margin:0.0em 0 0 0">
+						<p id="equation">2(Y * 0.4142)/1.414<br></p>
+						Y = Centerline_Radius
+					</span>
+				</div>
+
+			</div>
+		</div>
+
+		<script>
+			function getCutLength() {
+				let centerline_radius = document.getElementById("centerline_radius").value;
+
+				// Makes sure we received inputs...
+				if ( centerline_radius == "" ) {
+					answer = "Didn't provide an input."
+					document.getElementById("answer").innerHTML = answer;
+				} else {
+					centerline_radius = (centerline_radius * 0.4142);
+					centerline_radius = (centerline_radius * 2);
+					centerline_radius = (centerline_radius / 1.414);
+
+					// Convert cut length to sixteenths
+					answer = convert_to_sixteenths(centerline_radius);
+
+					// Place on page.
+					document.getElementById("answer").innerHTML = answer;
+				}
+			}
+
+
+			function reset_boxes() {
+				let centerline_radius = document.getElementById("centerline_radius").value = "";
+				let answer = document.getElementById("answer").innerHTML = " "
+			}
+		</script>
+	</div>
+
+	<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
+		<script src="/assets/js/append_buttons.js"></script>
+
+</body>
+
+</html>

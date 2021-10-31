@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Minimaxing by HTML5 UP</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<div id="header-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+
+						<header id="header">
+							<h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
+							<nav id="nav">
+								<! --- Buttons added here by javascript --- >
+							</nav>
+						</header>
+						<header id="header">
+							<nav id="na2">
+								<tr onclick="reset_boxes()">45°</tr>
+								<a href="cut-piece.html">90°</a>
+							</nav>
+						</header>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Banner -->
+		<div id="banner-wrapper">
+			<div class="container">
+
+				<div id="banner">
+					<span style=margin-bottom:0.05em>Run:<br></span>
+					<input type="number" id="run" value=""><br>
+					<span style=margin-bottom:0.05em>Rise:</span>
+					<input type="number" id="rise" value="">
+					<br>
+					<button style="margin-right:2%" onclick="getCutLength()">Calculate</button>
+					<button onclick="reset_boxes()">Reset</button>
+					<span>
+						<p id="answer">  </p>
+					</span>
+					<br>
+					<span id="equation" style="margin:0.0em 0 0 0">
+						<p id="equation">run[input]² + rise[input]² = true_offset_squared  - then figure run as normal</p>
+						X = run²<br>
+						Y = rise²<br></span>
+				</div>
+
+			</div>
+		</div>
+
+		<script>
+			function getCutLength() {
+				let run = parseFloat(document.getElementById("run").value);
+				let rise = parseFloat(document.getElementById("rise").value);
+
+				// Makes sure we received inputs...
+				if ( isNaN(run) || isNaN(rise)){
+					let answer = "";
+
+					if (isNaN(run)) {
+						answer = "Didn't provide an run.";
+					}
+					if (isNaN(rise)) {
+						if (isNaN(run)) {
+							answer = (answer + "<br>")
+						}
+						answer = answer + "Didn't provide a rise.";
+					}
+					document.getElementById("answer").innerHTML = answer;
+
+				} else {
+					let run_squared = square_it(run);
+					let rise_squared = square_it(rise);
+					let run_rise_squared = run_squared + rise_squared;
+					let  run_rise_square_root =  Math.sqrt(run_rise_squared);
+
+					// Convert cut length to sixteenths
+					answer = convert_to_sixteenths(run_rise_square_root);
+
+					// Place on page.
+					document.getElementById("answer").innerHTML = answer;
+				}
+			}
+
+
+			function reset_boxes() {
+				let run = document.getElementById("run").value = "";
+				let rise = document.getElementById("rise").value = "";
+				let answer = document.getElementById("answer").innerHTML = " "
+			}
+		</script>
+	</div>
+
+	<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
+		<script src="/assets/js/append_buttons.js"></script>
+
+</body>
+
+</html>
