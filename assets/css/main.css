@@ -5,6 +5,23 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+img.modular-border {
+    max-width: 100%;
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(to right, #657248, #68764b);
+    padding: 0.1em !important;
+}
+
+
+img#BlueprintImage {
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: -webkit-fill-available;
+    width: 100%;
+    height: 100%;
+}
+
 tr#radius {
 	height: 100%;
 }
@@ -40,12 +57,22 @@ td[id^=radius_] {
 }
 
 td[id^=radius_]:hover {
-	background-image: -moz-linear-gradient(top, #0782a0, #077d9b);
+	/* background-image: -moz-linear-gradient(top, #0782a0, #077d9b);
 	background-image: -webkit-linear-gradient(top, #0782a0, #077d9b);
 	background-image: -ms-linear-gradient(top, #0782a0, #077d9b);
 	background-image: linear-gradient(top, #0782a0, #077d9b);
-	background-color: #0882a1;
+	background-color: #0882a1; */
+	background-image: -moz-linear-gradient(top, #007b99, #007897);
+	background-image: -webkit-linear-gradient(top, #007294, #006e8b);
+	background-image: -ms-linear-gradient(top, #007b99, #007897);
+	background-image: linear-gradient(top, #007b99, #007897);
+	background-color: #007897;
 	box-shadow: inset 0px 1px 5px 1px rgba(0, 0, 0, 0.05), 0px 0px 5px 1px rgba(255, 255, 255, 0.05);
+}
+
+td[id^=radius_]:active {
+	background-color:#000000;
+	background-image: -webkit-linear-gradient(top, #024357, #01485c);
 }
 
 html, body, div, span, applet, object,
