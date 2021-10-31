@@ -5,6 +5,31 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+td[id^=radius_].current-page-item {
+	background-image: -moz-linear-gradient(top, #007b99, #007897);
+	background-image: -webkit-linear-gradient(top, #007b99, #007897);
+	background-image: -ms-linear-gradient(top, #007b99, #007897);
+	background-image: linear-gradient(top, #007b99, #007897);
+	background-color: #007897;
+	box-shadow: inset 0px 1px 5px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px 1px rgba(255, 255, 255, 0.1);
+}
+
+
+td[id^=radius_] {
+	padding-left: 1.25em;
+	padding-right: 1.25em;
+	caret-color: transparent;
+	cursor: pointer;
+}
+
+td[id^=radius_]:hover {
+	background-image: -moz-linear-gradient(top, #0782a0, #077d9b);
+	background-image: -webkit-linear-gradient(top, #0782a0, #077d9b);
+	background-image: -ms-linear-gradient(top, #0782a0, #077d9b);
+	background-image: linear-gradient(top, #0782a0, #077d9b);
+	background-color: #0882a1;
+	box-shadow: inset 0px 1px 5px 1px rgba(0, 0, 0, 0.05), 0px 0px 5px 1px rgba(255, 255, 255, 0.05);
+}
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
