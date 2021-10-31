@@ -5,6 +5,16 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+
+/* PLACEHOLDER FOR CLICK TO ENLARGE TEXT */
+/* .bottomright {   
+    position: absolute;
+    color: white;
+    right: 81%;
+    bottom: 57%;
+    font-size: 18px;
+} */
+
 img.modular-border {
     max-width: 100%;
     padding: 1rem;
@@ -1695,13 +1705,17 @@ input, select, textarea {
 	#banner {
 		position: relative;
 		width: 100%;
-		padding: 6em 0;
+		padding: 2em 1em 2em;
 		border-radius: 10px;
 		background-image: url(images/banner.jpg);
 		background-size: cover;
 		text-align: center;
 		box-shadow: inset 0 0 0 20px #fff;
-	}
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		-ms-border-radius: 10px;
+		-o-border-radius: 10px;
+}
 
 		#banner h2 {
 			font-size: 3.3em;
@@ -1787,7 +1801,7 @@ input, select, textarea {
 
 			#banner {
 				width: 100%;
-				padding: 5em 0;
+				padding: 2em 1em 2em;
 			}
 
 				#banner h2 {
@@ -1848,7 +1862,7 @@ input, select, textarea {
 			}
 
 			#banner {
-				padding: 6em 0;
+				padding: 2em 1em 2em;
 			}
 
 				#banner h2 {
@@ -2067,7 +2081,7 @@ input, select, textarea {
 
 			#banner {
 				box-shadow: inset 0 0 0 10px #fff;
-				padding: 2em 1em 14em;
+				padding: 2em 1em 2em;
 			}
 
 				#banner h2 {
