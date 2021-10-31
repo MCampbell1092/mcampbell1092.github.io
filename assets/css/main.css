@@ -5,6 +5,23 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+tr#radius {
+	height: 100%;
+}
+
+#na2 {
+	height: 2em;
+}
+
+#label {
+	/*background-color: #006797;*/
+	font-weight:900;
+	color: black;
+	text-transform: capitalize;
+	padding-right: 1em;
+	height: 100%;
+}
+
 td[id^=radius_].current-page-item {
 	background-image: -moz-linear-gradient(top, #007b99, #007897);
 	background-image: -webkit-linear-gradient(top, #007b99, #007897);
@@ -73,6 +90,8 @@ blockquote, q {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	margin: auto;
+	font-size: 144%;
 }
 
 body {
@@ -162,7 +181,9 @@ input, select, textarea {
 	}
 
 	strong {
-		color: #474e43;
+		color: #000000;
+		font-weight: 900;
+		font-size: 1.25em;
 	}
 
 	img.left {
@@ -1978,6 +1999,9 @@ input, select, textarea {
 				font-size: 1em;
 			}
 
+			table {
+				font-size: larger;
+			}
 		/* Reusable */
 
 			ul.small-image-list li img {
@@ -2057,4 +2081,12 @@ input, select, textarea {
 					color: #A6A88F;
 				}
 
+	}
+
+	/* Tiny (Galaxy Fold) */
+
+	@media screen and (max-width: 700px) {
+		table {
+			font-size: large;
+		}
 	}

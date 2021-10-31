@@ -5,11 +5,14 @@
 	 * @return {jQuery} jQuery object.
 	 */
 	$.fn.navList = function() {
-
 		var	$this = $(this);
 			$a = $this.find('a'),
 			b = [];
-
+		console.log('logging found "a\'s"');
+		console.log($a);
+		// while($a.length == 0) {
+		// 	console.log('Found no "a\'s"');
+		// }
 		$a.each(function() {
 
 			var	$this = $(this),

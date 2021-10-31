@@ -23,10 +23,11 @@
 								<! --- Buttons added here by javascript --->
 							</nav>
 						</header>
-						<header id="header">
+						<header id="header2">
 							<nav id="na2">
 								<table style=padding:14.05em>
 									<tr id="radius">
+										<td id="label">Elbow Radius:</td>
 										<td id="radius_45" class="current-page-item" onclick="toggleButton('radius_45')"
 											value="ON">45°</td>
 										<td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
@@ -59,7 +60,8 @@
 					</span>
 					<br>
 					<span id="equation" style="margin:0.0em 0 0 0">
-						<p id="equation">((x * 1.414) - (y * 0.41421111111) * 2) + (z * 2)<br></p>
+						<p id="equation"><strong>45°:</strong>((x * 1.414) - (y * 0.41421111111) * 2) + (z * 2)<br>
+							<strong>30°:</strong>(Offset x 2) - 2(Centerline Radius x .26795) + 2(Bead)</p>
 						X = offset<br>
 						Y = Centerline_Radius<br>
 						Z = Bead Amount
@@ -193,13 +195,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/js/browser.min.js"></script>
-	<script src="/assets/js/breakpoints.min.js"></script>
-	<script src="/assets/js/util.js"></script>
-	<script src="/assets/js/main.js"></script>
-	<script src="/assets/js/func_holder.js"></script>
-	<script src="/assets/js/append_buttons.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/func_holder.js"></script>
+		<script src="/assets/js/append_buttons.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
 
 </body>
 
