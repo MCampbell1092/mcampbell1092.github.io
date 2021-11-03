@@ -40,9 +40,9 @@
 
 				<div id="banner">
 					<span style=margin-bottom:0.05em>Offset:<br></span>
-					<input type="number" id="offset" value=""><br>
+					<input id="offset" value=""><br>
 					<span style=margin-bottom:0.05em>Centerline Radius:</span>
-					<input type="number" id="centerline_radius" value="">
+					<input id="centerline_radius" value="">
 					<br>
 					<button style="margin-right:2%" onclick="getCutLength()">Get Total Take-Up</button>
 					<button onclick="reset_boxes()">Reset</button>
@@ -64,30 +64,36 @@
 
 		<script>
 			function getCutLength() {
-				var offset = parseFloat(document.getElementById("offset").value);
-				var centerline_radius = parseFloat(document.getElementById("centerline_radius").value);
+				var offset = document.getElementById("offset").value;
+				var centerline_radius = document.getElementById("centerline_radius").value;
 				var offset_added;
 				var answer = "";
 
-				if ( isNaN(offset) || isNaN(centerline_radius)){
-					if (isNaN(offset)) {
+				if ( !is_useable(offset) || !is_useable(centerline_radius)){
+					if (!is_useable(offset)) {
 						answer = "Didn't provide an offset.";
 					}
-					if (isNaN(centerline_radius)) {
+					if (!is_useable(centerline_radius)) {
 						if (answer != "") {
 							answer = (answer + "<br>")
 						}
 						answer = answer + "Didn't provide a centerline radius.";
 						document.getElementById("answer").innerHTML = answer;
 					}
-
-				} else {
-					centerline_multiplied = (centerline_radius * 0.4142);
-					centerline_multiplied = (centerline_multiplied * 2);
-					offset_added = (centerline_multiplied + offset);
-					answer = convert_to_sixteenths(offset_added);
-					document.getElementById("answer").innerHTML = answer;
+					console.log("returning");
+					return;
 				}
+
+				// Convert fractions to decimal.
+				offset = math.number(math.fraction(offset));
+				centerline_radius = math.number(math.fraction(centerline_radius));
+
+
+				centerline_multiplied = (centerline_radius * 0.4142);
+				centerline_multiplied = (centerline_multiplied * 2);
+				offset_added = (centerline_multiplied + offset);
+				answer = convert_to_sixteenths(offset_added);
+				document.getElementById("answer").innerHTML = answer;
 
 
 			}
@@ -102,13 +108,16 @@
 	</div>
 
 	<!-- Scripts -->
-		<script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/func_holder.js"></script>
-		<script src="/assets/js/append_buttons.js"></script>
-		<script src="/assets/js/browser.min.js"></script>
-		<script src="/assets/js/breakpoints.min.js"></script>
-		<script src="/assets/js/util.js"></script>
-		<script src="/assets/js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<!-- <script src="assets/js/jquery.min.js"></script> -->
+		<script src="assets/js/func_holder.js"></script>
+		<script src="assets/js/append_buttons.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/ImageEnlargement.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
 
 </body>
 

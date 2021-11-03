@@ -35,7 +35,7 @@
 
 				<div id="banner">
 					<span style=margin-bottom:0.05em>Centerline Radius:</span>
-					<input type="number" id="centerline_radius" value="">
+					<input id="centerline_radius" value="">
 					<br>
 					<button style="margin-right:2%" onclick="getCutLength()">Calculate</button>
 					<button onclick="reset_boxes()">Reset</button>
@@ -58,21 +58,25 @@
 			function getCutLength() {
 				let centerline_radius = document.getElementById("centerline_radius").value;
 
-				// Makes sure we received inputs...
-				if ( centerline_radius == "" ) {
+				// Makes sure we received any/valid inputs...
+				if ( !is_useable(centerline_radius) ) {
 					answer = "Didn't provide an input."
 					document.getElementById("answer").innerHTML = answer;
-				} else {
-					centerline_radius = (centerline_radius * 0.4142);
-					centerline_radius = (centerline_radius * 2);
-					centerline_radius = (centerline_radius / 1.414);
-
-					// Convert cut length to sixteenths
-					answer = convert_to_sixteenths(centerline_radius);
-
-					// Place on page.
-					document.getElementById("answer").innerHTML = answer;
+					return;
 				}
+
+				// Convert fractions to decimal.
+				centerline_radius = math.number(math.fraction(centerline_radius));
+
+				centerline_radius = (centerline_radius * 0.4142);
+				centerline_radius = (centerline_radius * 2);
+				centerline_radius = (centerline_radius / 1.414);
+
+				// Convert cut length to sixteenths
+				answer = convert_to_sixteenths(centerline_radius);
+
+				// Place on page.
+				document.getElementById("answer").innerHTML = answer;
 			}
 
 
@@ -84,13 +88,16 @@
 	</div>
 
 	<!-- Scripts -->
-		<script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/func_holder.js"></script>
-		<script src="/assets/js/append_buttons.js"></script>
-		<script src="/assets/js/browser.min.js"></script>
-		<script src="/assets/js/breakpoints.min.js"></script>
-		<script src="/assets/js/util.js"></script>
-		<script src="/assets/js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<!-- <script src="assets/js/jquery.min.js"></script> -->
+		<script src="assets/js/func_holder.js"></script>
+		<script src="assets/js/append_buttons.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/ImageEnlargement.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
 
 </body>
 

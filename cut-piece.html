@@ -33,7 +33,15 @@
 										<td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
 									</tr>
 								</table>
+
+								<tr id="warning">
+									<br>
+									<div id="warningLabel">**Double check when typing fractions instead of decimals as this is an early test**</div>
+								</tr>
 							</nav>
+							<br>
+							<br>
+							<br>
 						</header>
 
 					</div>
@@ -47,11 +55,11 @@
 
 				<div id="banner">
 					<span style=margin-bottom:0.05em>Offset:<br></span>
-					<input type="number" id="offset" value=""><br>
+					<input type=text id="offset" value=""><br>
 					<span style=margin-bottom:0.05em>Centerline Radius:</span>
-					<input type="number" id="centerline_radius" value="">
+					<input id="centerline_radius" value="">
 					<span style=margin-bottom:0.05em>Bead Amount:<br></span>
-					<input type="number" id="amount_to_bead" value=""><br>
+					<input id="amount_to_bead" value=""><br>
 					<br>
 					<button style="margin-right:2%" onclick="getCutLength()">Calculate</button>
 					<button onclick="reset_boxes()">Reset</button>
@@ -128,8 +136,10 @@
 				// Convert cut length to sixteenths
 				answer = convert_to_sixteenths(cut_length);
 
-				// Place on page.
-				document.getElementById("answer").innerHTML = answer;
+				// Reduce the fraction
+				console.log(reduce(answer));
+
+				return answer;
 			}
 
 
@@ -151,40 +161,48 @@
 				// Convert cut length to sixteenths
 				answer = convert_to_sixteenths(cut_length);
 
-				// Place on page.
-				document.getElementById("answer").innerHTML = answer;
+				return answer;
 			}
 
 
 			function getCutLength() {
-				let offset = parseFloat(document.getElementById("offset").value);
-				let centerline_radius = parseFloat(document.getElementById("centerline_radius").value);
-				let amount_to_bead = parseFloat(document.getElementById("amount_to_bead").value);
+				let offset = document.getElementById("offset").value;
+				let centerline_radius = document.getElementById("centerline_radius").value;
+				let amount_to_bead = document.getElementById("amount_to_bead").value;
 
 				// Makes sure we received inputs...
-				if (isNaN(offset) || isNaN(centerline_radius)) {
+				if (!is_useable(offset) || !is_useable(centerline_radius)) {
 					let answer = "";
 
-					if (isNaN(offset)) {
+					if (!is_useable(offset)) {
 						answer = "Didn't provide an offset.";
 					}
-					if (isNaN(centerline_radius)) {
-						if (isNaN(offset)) {
+					if (!is_useable(centerline_radius)) {
+						if (!is_useable(offset)) {
 							answer = (answer + "<br>")
 						}
 						answer = answer + "Didn't provide a centerline radius.";
 					}
+
 					document.getElementById("answer").innerHTML = answer;
 					console.log('returning');
 					return;
-				}
+				}//////////////////////////////////////////
+
+				// Convert fractions to decimal.
+				offset = math.number(math.fraction(offset));
+				centerline_radius = math.number(math.fraction(centerline_radius));
+				amount_to_bead = math.number(math.fraction(amount_to_bead));
 
 				buttonState = getRadiusButtonState();
 				if( buttonState.id == "radius_45") {
-					calculate45(offset, centerline_radius, amount_to_bead); // radius_45
+					answer = calculate45(offset, centerline_radius, amount_to_bead); // radius_45
 				} else {
-					calculate30(offset, centerline_radius, amount_to_bead); // radius_30
+					answer = calculate30(offset, centerline_radius, amount_to_bead); // radius_30
 				}
+
+				// Place answer on the answer div.
+				document.getElementById("answer").innerHTML = answer;
 			}
 
 
@@ -207,6 +225,7 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script src="assets/js/ImageEnlargement.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
 
 </body>
 

@@ -14,6 +14,12 @@
     bottom: 57%;
     font-size: 18px;
 } */
+#warningLabel {
+	color:black;
+	font-weight:900;
+	font-size: 1.5rem;
+}
+
 
 img.modular-border {
     max-width: 100%;
