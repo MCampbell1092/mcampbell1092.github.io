@@ -28,6 +28,7 @@
 								<table style=padding:14.05em>
 									<tr id="radius">
 										<td id="label">Elbow Radius:</td>
+										<td id="radius_60" onclick="toggleButton('radius_60')" value="OFF">60°</td>
 										<td id="radius_45" class="current-page-item" onclick="toggleButton('radius_45')"
 											value="ON">45°</td>
 										<td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
@@ -123,6 +124,29 @@
 			}
 
 
+			function calculate60(offset, centerline_radius, amount_to_bead)
+			{
+				// Calculate cut length of a 45°  offset.
+				offset = (offset * 1.154);
+				let take_up = (centerline_radius * 0.57735) * 2;
+				let off_min_takeup = (offset - take_up);
+
+				console.log("take_up: " + take_up);
+				console.log("off_min_takeup: " + off_min_takeup);
+				amount_to_bead = (amount_to_bead * 2);
+				let cut_length = (off_min_takeup + amount_to_bead);
+
+				// Convert cut length to sixteenths
+				answer = convert_to_sixteenths(cut_length);
+
+				// Reduce the fraction
+				console.log(cut_length);
+				//console.log(reduce(answer));
+
+				return answer;
+			}
+
+
 			function calculate45(offset, centerline_radius, amount_to_bead)
 			{
 				// Calculate cut length of a 45°  offset.
@@ -195,7 +219,10 @@
 				amount_to_bead = math.number(math.fraction(amount_to_bead));
 
 				buttonState = getRadiusButtonState();
-				if( buttonState.id == "radius_45") {
+				if( buttonState.id == "radius_60") {
+					answer = calculate60(offset, centerline_radius, amount_to_bead); // radius_60
+				}
+				else if( buttonState.id == "radius_45") {
 					answer = calculate45(offset, centerline_radius, amount_to_bead); // radius_45
 				} else {
 					answer = calculate30(offset, centerline_radius, amount_to_bead); // radius_30
