@@ -29,8 +29,7 @@
 									<tr id="radius">
 										<td id="label">Elbow Radius:</td>
 										<td id="radius_60" onclick="toggleButton('radius_60')" value="OFF">60°</td>
-										<td id="radius_45" class="current-page-item" onclick="toggleButton('radius_45')"
-											value="ON">45°</td>
+										<td id="radius_45" onclick="toggleButton('radius_45')" value="OFF">45°</td>
 										<td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
 									</tr>
 								</table>
@@ -117,7 +116,7 @@
 
 				if (foundMatch == false) {
 					console.log('No radius selected!');
-					return "error";
+					return "None";
 				} else {
 					return match;
 				}
@@ -219,13 +218,18 @@
 				amount_to_bead = math.number(math.fraction(amount_to_bead));
 
 				buttonState = getRadiusButtonState();
-				if( buttonState.id == "radius_60") {
+
+				if( buttonState.id == "undefined" || buttonState == "None") {
+					answer = "Please select an elbow radius."
+				}
+				else if( buttonState.id == "radius_60") {
 					answer = calculate60(offset, centerline_radius, amount_to_bead); // radius_60
 				}
 				else if( buttonState.id == "radius_45") {
 					answer = calculate45(offset, centerline_radius, amount_to_bead); // radius_45
 				} else {
 					answer = calculate30(offset, centerline_radius, amount_to_bead); // radius_30
+					console.log("Button State Id = " + buttonState.id)
 				}
 
 				// Place answer on the answer div.
