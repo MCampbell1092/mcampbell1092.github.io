@@ -1,124 +1,223 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <!--
 	Minimaxing by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+  <head>
+    <title>Two Column 1 - Minimaxing by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
 
-<head>
-	<title>Two Column 1 - Minimaxing by HTML5 UP</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-</head>
+  <body>
+    <div id="page-wrapper">
+      <!-- Header -->
+      <div id="header-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <header id="header">
+                <h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
+                <nav id="nav">
+                  <! --- Buttons added here by javascript --- >
+                </nav>
+              </header>
+              <!-- Correct placement of nav id="na2" -->
+              <nav id="na2">
+                <table style="padding: 14.05em">
+                  <tr id="radius">
+                    <td id="label">Elbow Radius:</td>
+                    <!-- Added label for Elbow Radius -->
+                    <td id="radius_45" onclick="toggleButton('radius_45')" value="OFF">45°</td>
+                    <td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
+                  </tr>
+                </table>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<body>
-	<div id="page-wrapper">
+      <!-- Banner -->
+      <div id="banner-wrapper">
+        <div class="container">
+          <div id="banner">
+            <span style="margin-bottom: 0.05em">Offset:<br /></span>
+            <input id="offset" value="" /><br />
+            <span style="margin-bottom: 0.05em">Centerline Radius:</span>
+            <input id="centerline_radius" value="" /><br />
 
-		<!-- Header -->
-		<div id="header-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
+            <button style="margin-right: 2%" onclick="getCutLength()">Get Total Take-Up</button>
+            <button onclick="reset_boxes()">Reset</button>
+            <span>
+              <p id="answer"> </p>
+            </span>
+            <span id="equation" style="margin: 0.5em 0 0 0">
+              <p id="equation">X + 2(Y * .4142)<br /></p>
+              X = Offset<br />
+              Y = Centerline_Radius
+            </span>
+            <div>
+              <img src="images\Blueprint.png" alt="Blueprint Image" id="BlueprintImage" class="modular-border" test />
+            </div>
+          </div>
+        </div>
+      </div>
 
-						<header id="header">
-							<h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
-							<nav id="nav">
-								<! --- Buttons added here by javascript --- >
-							</nav>
-						</header>
-						<br>
-					</div>
-				</div>
-			</div>
-		</div>
+      <script>
+        function getCutLength() {
+          var offset = document.getElementById("offset").value;
+          var centerline_radius = document.getElementById("centerline_radius").value;
+          var offset_added;
+          var answer = "";
 
-		<!-- Banner -->
-		<div id="banner-wrapper">
-			<div class="container">
+          // Makes sure we received inputs...
+          if (!is_useable(offset) || !is_useable(centerline_radius)) {
+            let answer = "";
 
-				<div id="banner">
-					<span style=margin-bottom:0.05em>Offset:<br></span>
-					<input id="offset" value=""><br>
-					<span style=margin-bottom:0.05em>Centerline Radius:</span>
-					<input id="centerline_radius" value="">
-					<br>
-					<button style="margin-right:2%" onclick="getCutLength()">Get Total Take-Up</button>
-					<button onclick="reset_boxes()">Reset</button>
-					<span>
-						<p id="answer">  </p>
-					</span>
-					<span id="equation" style="margin:0.5em 0 0 0">
-						<p id="equation">X + 2(Y * .4142)<br></p>
-						X = Offset<br>
-						Y = Centerline_Radius
-					</span>
-					<div>
-						<img src="images\Blueprint.png" alt="Blueprint Image" id="BlueprintImage" class="modular-border"test>
-					</div>
-				</div>
+            if (!is_useable(offset)) {
+              answer = "Didn't provide an offset.";
+            }
+            if (!is_useable(centerline_radius)) {
+              if (!is_useable(offset)) {
+                answer = answer + "<br>";
+              }
+              answer = answer + "Didn't provide a centerline radius.";
+            }
 
-			</div>
-		</div>
+            document.getElementById("answer").innerHTML = answer;
+            console.log("returning");
+            return;
+          }
 
-		<script>
-			function getCutLength() {
-				var offset = document.getElementById("offset").value;
-				var centerline_radius = document.getElementById("centerline_radius").value;
-				var offset_added;
-				var answer = "";
+          // Convert fractions to decimal.
+          offset = math.number(math.fraction(offset));
+          centerline_radius = math.number(math.fraction(centerline_radius));
 
-				if ( !is_useable(offset) || !is_useable(centerline_radius)){
-					if (!is_useable(offset)) {
-						answer = "Didn't provide an offset.";
-					}
-					if (!is_useable(centerline_radius)) {
-						if (answer != "") {
-							answer = (answer + "<br>")
-						}
-						answer = answer + "Didn't provide a centerline radius.";
-						document.getElementById("answer").innerHTML = answer;
-					}
-					console.log("returning");
-					return;
-				}
+          buttonState = getRadiusButtonState();
 
-				// Convert fractions to decimal.
-				offset = math.number(math.fraction(offset));
-				centerline_radius = math.number(math.fraction(centerline_radius));
+          switch (buttonState.id) {
+            case "None":
+            case undefined:
+              answer = "Please select an elbow radius.";
+              document.getElementById("answer").innerHTML = answer;
+              return;
+            case "radius_45":
+              answer = calculate45(offset, centerline_radius); // radius_45
+              break;
+            case "radius_30":
+              answer = calculate30(offset, centerline_radius); // radius_30
+              break;
+          }
 
+          console.log("answer: " + answer);
+          // Append the answer to the page.
+          document.getElementById("answer").innerHTML = answer;
+        }
 
-				centerline_multiplied = (centerline_radius * 0.4142);
-				centerline_multiplied = (centerline_multiplied * 2);
-				offset_added = (centerline_multiplied + offset);
-				answer = convert_to_sixteenths(offset_added);
-				document.getElementById("answer").innerHTML = answer;
+        function calculate45(offset, centerline_radius) {
+          centerline_multiplied = centerline_radius * 0.4142;
+          centerline_multiplied = centerline_multiplied * 2;
+          offset_added = centerline_multiplied + offset;
+          answer = convert_to_sixteenths(offset_added);
+          return answer;
+        }
 
+        function calculate30(offset, centerline_radius) {
+          let cut_piece = calculate_cut_piece(offset, centerline_radius);
+          let result = calculateValue30(centerline_radius, offset, cut_piece);
 
-			}
+          answer = convert_to_sixteenths(result);
+          return answer;
+        }
 
+        function calculate_cut_piece(offset, centerline_radius) {
+          /*
+				  (Offset x 2) - 2(Centerline Radius x .26795)
+				  */
 
-			function reset_boxes() {
-				let offset = document.getElementById("offset").value = "";
-				let centerline_radius = document.getElementById("centerline_radius").value = "";
-				let answer = document.getElementById("answer").innerHTML = " ";
-			}
-		</script>
-	</div>
+          // Calculate cut length of a 30° offset.
+          offset = offset * 2;
+          let take_up = centerline_radius * 0.26795 * 2;
+          let off_min_takeup = offset - take_up;
 
-	<!-- Scripts -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<!-- <script src="assets/js/jquery.min.js"></script> -->
-		<script src="assets/js/func_holder.js"></script>
-		<script src="assets/js/append_buttons.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-		<script src="assets/js/ImageEnlargement.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
+          let cut_length = off_min_takeup;
 
-</body>
+          // Convert cut length to sixteenths
+          answer = cut_length;
 
+          return answer;
+        }
+
+        function calculateValue30(centerline_radius, offset, cut_piece) {
+          const adjusted_radius = centerline_radius * 0.26795;
+          const term1 = adjusted_radius + adjusted_radius + cut_piece;
+          const term2 = Math.pow(term1, 2);
+          const term3 = Math.pow(offset, 2);
+          const term4 = Math.sqrt(term2 - term3);
+          const result = term4 + adjusted_radius + adjusted_radius;
+          return result;
+        }
+
+        function reset_boxes() {
+          let offset = (document.getElementById("offset").value = "");
+          let centerline_radius = (document.getElementById("centerline_radius").value = "");
+          let answer = (document.getElementById("answer").innerHTML = " ");
+        }
+
+        function toggleButton(buttonID) {
+          var buttonsParent = document.getElementById("radius");
+          var clickedButton = document.getElementById(buttonID);
+
+          // Loop through buttons
+          Array.prototype.forEach.call(buttonsParent.children, function (child) {
+            if (child.id.startsWith("radius_")) {
+              // Ensure to target only the radius buttons
+              child.classList.remove("current-page-item");
+            }
+          });
+
+          // Add current-page-item to clicked button
+          clickedButton.classList.add("current-page-item");
+        }
+
+        function getRadiusButtonState() {
+          // Finds out which button is selected/toggled and returns the element.
+          let buttonParent = document.getElementById("radius");
+          let buttonList = buttonParent.children;
+          let foundMatch = false;
+          let match;
+
+          Array.prototype.forEach.call(buttonParent.children, (child) => {
+            if (child.classList.value == "current-page-item") {
+              match = child;
+              foundMatch = true;
+            }
+          });
+
+          if (foundMatch == false) {
+            console.log("No radius selected!");
+            return "None";
+          } else {
+            return match;
+          }
+        }
+      </script>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="assets/js/jquery.min.js"></script> -->
+    <script src="assets/js/func_holder.js"></script>
+    <script src="assets/js/append_buttons.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ImageEnlargement.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
+  </body>
 </html>
