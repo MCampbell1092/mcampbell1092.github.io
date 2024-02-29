@@ -1,263 +1,247 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Minimaxing by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
 
-<head>
-	<title>Minimaxing by HTML5 UP</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-</head>
+  <body>
+    <div id="page-wrapper">
+      <!-- Header -->
+      <div id="header-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <header id="header">
+                <h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
+                <nav id="nav">
+                  <! --- Buttons added here by javascript --->
+                </nav>
+              </header>
+              <header id="header2">
+                <nav id="na2">
+                  <table style="padding: 14.05em">
+                    <tr id="radius">
+                      <td id="label">Elbow Radius:</td>
+                      <td id="radius_60" onclick="toggleButton('radius_60')" value="OFF">60°</td>
+                      <td id="radius_45" onclick="toggleButton('radius_45')" value="OFF">45°</td>
+                      <td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
+                    </tr>
+                  </table>
 
-<body>
-	<div id="page-wrapper">
+                  <tr id="warning">
+                    <br />
+                    <div id="warningLabel">**Fractions tested and working now.**</div>
+                  </tr>
+                </nav>
+                <br />
+                <br />
+                <br />
+              </header>
+            </div>
+          </div>
+        </div>
+      </div>
 
-		<!-- Header -->
-		<div id="header-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
+      <!-- Banner -->
+      <div id="banner-wrapper">
+        <div class="container">
+          <div id="banner">
+            <span style="margin-bottom: 0.05em">Offset:<br /></span>
+            <input type="text" id="offset" value="" /><br />
+            <span style="margin-bottom: 0.05em">Centerline Radius:</span>
+            <input id="centerline_radius" value="" />
+            <span style="margin-bottom: 0.05em">Bead Amount:<br /></span>
+            <input id="amount_to_bead" value="" /><br />
+            <br />
+            <button style="margin-right: 2%" onclick="getCutLength()">Calculate</button>
+            <button onclick="reset_boxes()">Reset</button>
+            <span>
+              <p id="answer"> </p>
+            </span>
+            <br />
+            <span id="equation" style="margin: 0em 0 0 0">
+              <p id="equation">
+                <strong>45°:</strong> (x * 1.414) - 2(y * 0.41421111111) + (z * 2)<br />
+                <strong>30°:</strong>(x * 2) - 2(y * .26795) + (z * 2)
+              </p>
+              X = offset<br />
+              Y = Centerline_Radius<br />
+              Z = Bead Amount<br />
+              <br />
+            </span>
+            <div>
+              <img src="images\Blueprint.png" alt="Blueprint Image" id="BlueprintImage" class="modular-border" test />
+            </div>
+          </div>
+          <div id="warningLabel">Report any issues to MCampbell1092@gmail.com</div>
+        </div>
+      </div>
 
-						<header id="header">
-							<h1><a href="cut-piece.html" id="logo">Radius Helper</a></h1>
-							<nav id="nav">
-								<! --- Buttons added here by javascript --->
-							</nav>
-						</header>
-						<header id="header2">
-							<nav id="na2">
-								<table style=padding:14.05em>
-									<tr id="radius">
-										<td id="label">Elbow Radius:</td>
-										<td id="radius_60" onclick="toggleButton('radius_60')" value="OFF">60°</td>
-										<td id="radius_45" onclick="toggleButton('radius_45')" value="OFF">45°</td>
-										<td id="radius_30" onclick="toggleButton('radius_30')" value="OFF">30°</td>
-									</tr>
-								</table>
+      <script>
+        function toggleButton(buttonID) {
+          buttonsParent = document.getElementById("radius");
+          clickedButton = document.getElementById(buttonID);
 
-								<tr id="warning">
-									<br>
-									<div id="warningLabel">**Double check when typing fractions instead of decimals as this is an early test**</div>
-								</tr>
-							</nav>
-							<br>
-							<br>
-							<br>
-						</header>
+          // Loop through buttons
+          Array.prototype.forEach.call(buttonsParent.children, (child) => {
+            console.log(child.classList);
+            if (child.classList != "") {
+              child.classList.value = "";
+            }
+          });
 
-					</div>
-				</div>
-			</div>
-		</div>
+          // Add current-page-item to clicked button
+          clickedButton.classList.add("current-page-item");
+        }
 
-		<!-- Banner -->
-		<div id="banner-wrapper">
-			<div class="container">
+        function getRadiusButtonState() {
+          // Finds out which button is selected/toggled and returns the element.
+          let buttonParent = document.getElementById("radius");
+          let buttonList = buttonParent.children;
+          let foundMatch = false;
+          let match;
 
-				<div id="banner">
-					<span style=margin-bottom:0.05em>Offset:<br></span>
-					<input type=text id="offset" value=""><br>
-					<span style=margin-bottom:0.05em>Centerline Radius:</span>
-					<input id="centerline_radius" value="">
-					<span style=margin-bottom:0.05em>Bead Amount:<br></span>
-					<input id="amount_to_bead" value=""><br>
-					<br>
-					<button style="margin-right:2%" onclick="getCutLength()">Calculate</button>
-					<button onclick="reset_boxes()">Reset</button>
-					<span>
-						<p id="answer">  </p>
-					</span>
-					<br>
-					<span id="equation" style="margin:0.0em 0 0 0">
-						<p id="equation"><strong>45°:</strong>	(x * 1.414) - 2(y * 0.41421111111) + (z * 2)<br>
-							<strong>30°:</strong>(x * 2) - 2(y * .26795) + (z * 2)</p>
-						X = offset<br>
-						Y = Centerline_Radius<br>
-						Z = Bead Amount<br>
-						<br>
-					</span>
-					<div>
-						<img src="images\Blueprint.png" alt="Blueprint Image" id="BlueprintImage" class="modular-border"test>
-					</div>
-				</div>
-			</div>
-		</div>
+          Array.prototype.forEach.call(buttonParent.children, (child) => {
+            if (child.classList.value == "current-page-item") {
+              match = child;
+              foundMatch = true;
+            }
+          });
 
-		<script>
-			function toggleButton(buttonID) {
-				buttonsParent = document.getElementById("radius");
-				clickedButton = document.getElementById(buttonID);
+          if (foundMatch == false) {
+            console.log("No radius selected!");
+            return "None";
+          } else {
+            return match;
+          }
+        }
 
-				// Loop through buttons
-				Array.prototype.forEach.call(buttonsParent.children, child => {
-					console.log(child.classList);
-					if (child.classList != "") {
-						child.classList.value = "";
-					}
-				});
+        function calculate60(offset, centerline_radius, amount_to_bead) {
+          // Calculate cut length of a 45°  offset.
+          offset = offset * 1.154;
+          let take_up = centerline_radius * 0.57735 * 2;
+          let off_min_takeup = offset - take_up;
 
-				// Add current-page-item to clicked button
-				clickedButton.classList.add('current-page-item');
-			}
+          console.log("take_up: " + take_up);
+          console.log("off_min_takeup: " + off_min_takeup);
+          amount_to_bead = amount_to_bead * 2;
+          let cut_length = off_min_takeup + amount_to_bead;
 
+          // Convert cut length to sixteenths
+          answer = convert_to_sixteenths(cut_length);
 
-			function getRadiusButtonState() {
-				// Finds out which button is selected/toggled and returns the element.
-				let buttonParent = document.getElementById("radius");
-				let buttonList = buttonParent.children;
-				let foundMatch = false;
-				let match;
+          // Reduce the fraction
+          //console.log(cut_length);
+          console.log(reduce(answer));
 
-				Array.prototype.forEach.call(buttonParent.children, child => {
-					if (child.classList.value == 'current-page-item') {
-						match = child;
-						foundMatch = true;
-					}
-				});
+          return answer;
+        }
 
-				if (foundMatch == false) {
-					console.log('No radius selected!');
-					return "None";
-				} else {
-					return match;
-				}
-			}
+        function calculate45(offset, centerline_radius, amount_to_bead) {
+          // Calculate cut length of a 45°  offset.
+          offset = offset * 1.414;
+          let take_up = centerline_radius * 0.414211111111 * 2;
+          let off_min_takeup = offset - take_up;
 
+          amount_to_bead = amount_to_bead * 2;
+          let cut_length = off_min_takeup + amount_to_bead;
 
-			function calculate60(offset, centerline_radius, amount_to_bead)
-			{
-				// Calculate cut length of a 45°  offset.
-				offset = (offset * 1.154);
-				let take_up = (centerline_radius * 0.57735) * 2;
-				let off_min_takeup = (offset - take_up);
+          // Convert cut length to sixteenths
+          answer = convert_to_sixteenths(cut_length);
 
-				console.log("take_up: " + take_up);
-				console.log("off_min_takeup: " + off_min_takeup);
-				amount_to_bead = (amount_to_bead * 2);
-				let cut_length = (off_min_takeup + amount_to_bead);
+          // Reduce the fraction
+          console.log(reduce(answer));
 
-				// Convert cut length to sixteenths
-				answer = convert_to_sixteenths(cut_length);
+          return answer;
+        }
 
-				// Reduce the fraction
-				//console.log(cut_length);
-				console.log(reduce(answer));
-
-				return answer;
-			}
-
-
-			function calculate45(offset, centerline_radius, amount_to_bead)
-			{
-				// Calculate cut length of a 45°  offset.
-				offset = (offset * 1.414);
-				let take_up = (centerline_radius * 0.414211111111) * 2;
-				let off_min_takeup = (offset - take_up);
-
-				amount_to_bead = (amount_to_bead * 2);
-				let cut_length = (off_min_takeup + amount_to_bead);
-
-				// Convert cut length to sixteenths
-				answer = convert_to_sixteenths(cut_length);
-
-				// Reduce the fraction
-				console.log(reduce(answer));
-
-				return answer;
-			}
-
-
-			function calculate30(offset, centerline_radius, amount_to_bead)
-			{
-				/*
+        function calculate30(offset, centerline_radius, amount_to_bead) {
+          /*
 				(Offset x 2) - 2(Centerline Radius x .26795) + 2(Bead)
 				*/
 
+          // Calculate cut length of a 30° offset.
+          offset = offset * 2;
+          let take_up = centerline_radius * 0.26795 * 2;
+          let off_min_takeup = offset - take_up;
 
-				// Calculate cut length of a 30° offset.
-				offset = (offset * 2);
-				let take_up = (centerline_radius * 0.26795) * 2;
-				let off_min_takeup = (offset - take_up);
+          amount_to_bead = amount_to_bead * 2;
+          let cut_length = off_min_takeup + amount_to_bead;
 
-				amount_to_bead = (amount_to_bead * 2);
-				let cut_length = (off_min_takeup + amount_to_bead);
+          // Convert cut length to sixteenths
+          answer = convert_to_sixteenths(cut_length);
 
-				// Convert cut length to sixteenths
-				answer = convert_to_sixteenths(cut_length);
+          return answer;
+        }
 
-				return answer;
-			}
+        function getCutLength() {
+          let offset = document.getElementById("offset").value;
+          let centerline_radius = document.getElementById("centerline_radius").value;
+          let amount_to_bead = document.getElementById("amount_to_bead").value;
 
+          // Makes sure we received inputs...
+          if (!is_useable(offset) || !is_useable(centerline_radius)) {
+            let answer = "";
 
-			function getCutLength() {
-				let offset = document.getElementById("offset").value;
-				let centerline_radius = document.getElementById("centerline_radius").value;
-				let amount_to_bead = document.getElementById("amount_to_bead").value;
+            if (!is_useable(offset)) {
+              answer = "Didn't provide an offset.";
+            }
+            if (!is_useable(centerline_radius)) {
+              if (!is_useable(offset)) {
+                answer = answer + "<br>";
+              }
+              answer = answer + "Didn't provide a centerline radius.";
+            }
 
-				// Makes sure we received inputs...
-				if (!is_useable(offset) || !is_useable(centerline_radius)) {
-					let answer = "";
+            document.getElementById("answer").innerHTML = answer;
+            console.log("returning");
+            return;
+          } ///////////////////////////////////
 
-					if (!is_useable(offset)) {
-						answer = "Didn't provide an offset.";
-					}
-					if (!is_useable(centerline_radius)) {
-						if (!is_useable(offset)) {
-							answer = (answer + "<br>")
-						}
-						answer = answer + "Didn't provide a centerline radius.";
-					}
+          // Convert fractions to decimal.
+          offset = math.number(math.fraction(offset));
+          centerline_radius = math.number(math.fraction(centerline_radius));
+          amount_to_bead = math.number(math.fraction(amount_to_bead));
 
-					document.getElementById("answer").innerHTML = answer;
-					console.log('returning');
-					return;
-				}///////////////////////////////////
+          buttonState = getRadiusButtonState();
 
-				// Convert fractions to decimal.
-				offset = math.number(math.fraction(offset));
-				centerline_radius = math.number(math.fraction(centerline_radius));
-				amount_to_bead = math.number(math.fraction(amount_to_bead));
+          if (buttonState.id == "undefined" || buttonState == "None") {
+            answer = "Please select an elbow radius.";
+          } else if (buttonState.id == "radius_60") {
+            answer = calculate60(offset, centerline_radius, amount_to_bead); // radius_60
+          } else if (buttonState.id == "radius_45") {
+            answer = calculate45(offset, centerline_radius, amount_to_bead); // radius_45
+          } else {
+            answer = calculate30(offset, centerline_radius, amount_to_bead); // radius_30
+            console.log("Button State Id = " + buttonState.id);
+          }
 
-				buttonState = getRadiusButtonState();
+          // Place answer on the answer div.
+          document.getElementById("answer").innerHTML = answer;
+        }
 
-				if( buttonState.id == "undefined" || buttonState == "None") {
-					answer = "Please select an elbow radius."
-				}
-				else if( buttonState.id == "radius_60") {
-					answer = calculate60(offset, centerline_radius, amount_to_bead); // radius_60
-				}
-				else if( buttonState.id == "radius_45") {
-					answer = calculate45(offset, centerline_radius, amount_to_bead); // radius_45
-				} else {
-					answer = calculate30(offset, centerline_radius, amount_to_bead); // radius_30
-					console.log("Button State Id = " + buttonState.id)
-				}
+        function reset_boxes() {
+          let offset = (document.getElementById("offset").value = "");
+          let centerline_radius = (document.getElementById("centerline_radius").value = "");
+          let amount_to_bead = (document.getElementById("amount_to_bead").value = "");
+          let answer = (document.getElementById("answer").innerHTML = " ");
+        }
+      </script>
+    </div>
 
-				// Place answer on the answer div.
-				document.getElementById("answer").innerHTML = answer;
-			}
-
-
-			function reset_boxes() {
-				let offset = document.getElementById("offset").value = "";
-				let centerline_radius = document.getElementById("centerline_radius").value = "";
-				let amount_to_bead = document.getElementById("amount_to_bead").value = "";
-				let answer = document.getElementById("answer").innerHTML = " "
-			}
-		</script>
-	</div>
-
-	<!-- Scripts -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<!-- <script src="assets/js/jquery.min.js"></script> -->
-		<script src="assets/js/func_holder.js"></script>
-		<script src="assets/js/append_buttons.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-		<script src="assets/js/ImageEnlargement.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
-
-</body>
-
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="assets/js/jquery.min.js"></script> -->
+    <script src="assets/js/func_holder.js"></script>
+    <script src="assets/js/append_buttons.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ImageEnlargement.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.js"></script>
+  </body>
 </html>
