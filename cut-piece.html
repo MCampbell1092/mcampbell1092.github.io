@@ -141,6 +141,12 @@
         }
 
         function calculate45(offset, centerline_radius, amount_to_bead) {
+          // Get Take-Up
+          centerline_multiplied = centerline_radius * 0.4142;
+          centerline_multiplied = centerline_multiplied * 2;
+          offset_added = centerline_multiplied + offset
+          let answer2 = convert_to_sixteenths(offset_added);
+
           // Calculate cut length of a 45°  offset.
           offset = offset * 1.414;
           let take_up = centerline_radius * 0.414211111111 * 2;
@@ -155,7 +161,7 @@
           // Reduce the fraction
           console.log(reduce(answer));
 
-          return answer;
+          return "Cut-Piece: " + answer + "<br>" + "Take-Up: " + answer2;
         }
 
         function calculate30(offset, centerline_radius, amount_to_bead) {
@@ -168,13 +174,27 @@
           let take_up = centerline_radius * 0.26795 * 2;
           let off_min_takeup = offset - take_up;
 
+          offset = offset / 2;
+
           amount_to_bead = amount_to_bead * 2;
           let cut_length = off_min_takeup + amount_to_bead;
 
           // Convert cut length to sixteenths
           answer = convert_to_sixteenths(cut_length);
+          answer2 = calculateValue30(centerline_radius, offset, off_min_takeup);
+          answer2 = convert_to_sixteenths(answer2);
 
-          return answer;
+          return "Cut-Piece: " + answer + "<br>" + "Take-Up: " + answer2;
+        }
+
+        function calculateValue30(centerline_radius, offset, cut_piece) {
+          const adjusted_radius = centerline_radius * 0.26795;
+          const term1 = adjusted_radius + adjusted_radius + cut_piece;
+          const term2 = Math.pow(term1, 2);
+          const term3 = Math.pow(offset, 2);
+          const term4 = Math.sqrt(term2 - term3);
+          const result = term4 + adjusted_radius + adjusted_radius;
+          return result;
         }
 
         function getCutLength() {
